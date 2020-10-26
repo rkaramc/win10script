@@ -56,9 +56,9 @@ If ($args -And $args[0].ToLower() -eq "-preset") {
 If ($args) {
 	$tweaks = $args
 	If ($preset) {
-		$tweaks = Get-Content $preset -ErrorAction Stop | ForEach { $_.Trim() } | Where { $_ -ne "" -and $_[0] -ne "#" }
+		$tweaks = Get-Content $preset -ErrorAction Stop | ForEach-Object { $_.Trim() } | Where-Object { $_ -ne "" -and $_[0] -ne "#" }
 	}
 }
 
 # Call the desired tweak functions
-$tweaks | ForEach { Invoke-Expression $_ }
+$tweaks | ForEach-Object { Invoke-Expression $_ }
